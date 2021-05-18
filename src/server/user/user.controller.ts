@@ -6,7 +6,9 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
 } from '@nestjs/common';
+import { ValidationPipe } from 'src/common/pipe/validation.pipe';
 import { CreateUserDTO, EditUserDTO } from './dto/user.dto';
 import { User, UserResponse } from './interface/user.interface';
 import { UserService } from './user.service';
@@ -46,6 +48,7 @@ export class UserController {
   }
 
   // PUT /user/:_id
+  @UsePipes(new ValidationPipe()) // 使用管道验证
   @Put(':_id')
   async editOne(
     @Param('_id') _id: string,

@@ -5,6 +5,7 @@ import { logger } from './common/middleware/logger.middleware';
 import { TransformInterceptor } from './common/interceptor/transform.interceptor';
 import { AnyExceptionFilter } from './common/filter/any-exception.filter';
 import { HttpExceptionFilter } from './common/filter/http-exception.filter';
+// import { ValidationPipe } from './common/pipe/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,6 +19,8 @@ async function bootstrap() {
   app.useGlobalFilters(new AnyExceptionFilter());
   // 过滤处理 HTTP 异常
   app.useGlobalFilters(new HttpExceptionFilter());
+
+  // app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(3000);
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import {
   ArgumentMetadata,
   Injectable,
@@ -12,7 +13,8 @@ import { Logger } from '../utils/log4js';
 export class ValidationPipe implements PipeTransform {
   async transform(value: any, { metatype }: ArgumentMetadata) {
     console.log(`value:`, value, 'metatype: ', metatype);
-    if (!metatype || !this.toValidate(metatype)) {
+    // if (!metatype || !this.toValidate(metatype)) {
+    if (!metatype) {
       // 如果没有传入验证规则，则不验证，直接返回数据
       return value;
     }
@@ -28,9 +30,9 @@ export class ValidationPipe implements PipeTransform {
 
     return value;
   }
-
-  private toValidate(metatype: any): boolean {
-    const types: any[] = [String, Boolean, Number, Array, Object];
-    return !types.includes(metatype);
-  }
+  // 这里 metatype 实际形如  [Function: String]，而不是文档中的 String，所以此段代码不及预期先注释掉
+  // private toValidate(metatype: Function): boolean {
+  //   const types: Function[] = [String, Boolean, Number, Array, Object];
+  //   return !types.includes(metatype);
+  // }
 }

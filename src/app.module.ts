@@ -10,6 +10,13 @@ import { MongooseModule } from '@nestjs/mongoose';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    // // 全局的数据格式验证管道
+    // {
+    //   provide: APP_PIPE,
+    //   useClass: ValidationPipe,
+    // },
+    AppService,
+  ],
 })
 export class AppModule {}
